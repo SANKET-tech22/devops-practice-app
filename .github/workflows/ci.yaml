@@ -1,0 +1,29 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Login to Dockerhub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.sanketf5}}
+          password: ${{ secrets.Lasvegas@2027}}
+
+      - name: Build Docker image
+        run: | 
+          docker build -t ${{ secrets.sanketf5 }}/devops-practice-app:latest .
+
+      - name: Push Docker image
+        run: |
+          docker push ${{ secrets.sanketf5}}/devops-practice-app:latest
